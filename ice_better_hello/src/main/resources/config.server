@@ -1,0 +1,12 @@
+#
+# The server creates one single object adapter with the name
+# "Hello". The following line sets the endpoints for this
+# adapter.
+#
+Hello.Endpoints=tcp -p 10000
+
+#
+# Only listen on the localhost interface by default.
+#
+Ice.Default.Host=localhost
+

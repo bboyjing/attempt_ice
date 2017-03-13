@@ -1,0 +1,35 @@
+group 'cn.didadu'
+version '1.0.0-SNAPSHOT'
+
+//可以在buildscrip中添加第三方插件源
+buildscript {
+    repositories {
+        maven {
+            url 'https://repo.zeroc.com/nexus/content/repositories/releases'
+        }
+    }
+    dependencies {
+        classpath group: 'com.zeroc.gradle.ice-builder', name: 'slice', version: '1.0.5'
+    }
+}
+
+apply plugin: 'java'
+//通过apply，引入插件
+apply plugin: 'slice'
+
+//更改slice插件的属性
+slice{
+    //更改将slice文件编译成java文件的路径
+    output = file('src/main/java')
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile(group: 'com.zeroc', name: 'ice', version: '3.6.3')
+}
