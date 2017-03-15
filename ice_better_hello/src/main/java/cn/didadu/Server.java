@@ -2,6 +2,7 @@ package cn.didadu;
 
 import Ice.Application;
 import Ice.ObjectAdapter;
+import cn.didadu.service.GoodbyeImpl;
 import cn.didadu.service.HelloImpl;
 
 /**
@@ -13,6 +14,7 @@ public class Server extends Application{
         // 通过config.server配置文件初始化服务站点
         ObjectAdapter adapter = communicator().createObjectAdapter("Hello");
         adapter.add(new HelloImpl(), Ice.Util.stringToIdentity("hello"));
+        adapter.add(new GoodbyeImpl(), Ice.Util.stringToIdentity("bye"));
         adapter.activate();
         System.out.println("server start...");
         communicator().waitForShutdown();

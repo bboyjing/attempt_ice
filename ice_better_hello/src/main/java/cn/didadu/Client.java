@@ -1,6 +1,8 @@
 package cn.didadu;
 
 import Ice.Application;
+import cn.didadu.generate.goodbye.ByePrx;
+import cn.didadu.generate.goodbye.ByePrxHelper;
 import cn.didadu.generate.helloworld.HelloPrx;
 import cn.didadu.generate.helloworld.HelloPrxHelper;
 
@@ -22,16 +24,30 @@ public class Client extends Application {
     public int run(String[] args) {
         // 注册ShutdownHook，关闭应用时销毁Communicator实例
         setInterruptHook(new ShutdownHook());
+
+        hello();
+        bye();
+
+        // 测试ShutdownHook
+        communicator().waitForShutdown();
+        return 0;
+    }
+
+    private void hello() {
         // 通过config.client中的Hello.Proxy，构造通用Proxy对象
         Ice.ObjectPrx base = communicator().propertyToProxy("Hello.Proxy");
         HelloPrx prxy = HelloPrxHelper.checkedCast(base);
         prxy.sayHello(0);
         // shutdown()方法可以关闭服务...
-        prxy.shutdown();
-        // 测试ShutdownHook
-        communicator().waitForShutdown();
-        return 0;
+        //prxy.shutdown();
     }
+
+    private void bye() {
+        Ice.ObjectPrx base = communicator().propertyToProxy("Bye.Proxy");
+        ByePrx prxy = ByePrxHelper.checkedCast(base);
+        prxy.sayGoodbye();
+    }
+
 
     public static void main(String[] args) {
         Client app = new Client();

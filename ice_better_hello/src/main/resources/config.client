@@ -3,7 +3,7 @@
 # "hello" object in the server.
 #
 Hello.Proxy=hello:tcp -p 10000
-
+Bye.Proxy=bye:tcp -p 10000
 #
 # Only connect to the localhost interface by default.
 #

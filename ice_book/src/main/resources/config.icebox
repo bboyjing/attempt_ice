@@ -1,0 +1,2 @@
+IceBox.PrintServicesReady=MyAppIceBox
+IceBox.Service.OnlineBook=cn.didadu.service.OnlineBookService --Ice.Config=config.service

@@ -1,0 +1,49 @@
+group 'cn.didadu'
+version '1.0.0-SNAPSHOT'
+
+//可以在buildscrip中添加第三方插件源
+buildscript {
+    repositories {
+        maven {
+            url 'https://repo.zeroc.com/nexus/content/repositories/releases'
+        }
+    }
+    dependencies {
+        classpath group: 'com.zeroc.gradle.ice-builder', name: 'slice', version: '1.0.5'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'slice'
+
+//更改slice插件的属性
+slice{
+    //更改将slice文件编译成java文件的路径
+    output = file('src/main/java')
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    iceVersion = "3.6.3"
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'com.zeroc', name: 'ice', version: iceVersion
+    compile group: 'com.zeroc', name: 'icebox', version: iceVersion
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.24'
+}
+
+jar {
+    manifest {
+        attributes("Main-Class": "IceBox.Server")
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
