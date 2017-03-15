@@ -1,0 +1,2 @@
+OnlineBook.Proxy=OnlineBook:tcp -h localhost -p 10000
+SmsService.Proxy=SmsService:tcp -h localhost -p 10001

@@ -1,2 +1,14 @@
 IceBox.PrintServicesReady=MyAppIceBox
+
 IceBox.Service.OnlineBook=cn.didadu.service.OnlineBookService --Ice.Config=config.service
+IceBox.Service.SmsService=cn.didadu.service.SmsService --Ice.Config=config.service
+
+# 指定启动顺序
+IceBox.LoadOrder=OnlineBook,SmsService
+
+#Ice.Trace.Network=1
+# 打印出线程信息
+Ice.Trace.ThreadPool=1
+# 共用UseSharedCommunicator
+IceBox.UseSharedCommunicator.OnlineBook=1
+IceBox.UseSharedCommunicator.SmsService=1
